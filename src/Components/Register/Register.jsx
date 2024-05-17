@@ -1,11 +1,15 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import auth from "../../Firebase/Firebase.config";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa6";
 //50-4 Simple Input Field Validation, Error, And Success Message
+//50-5 Regular Expression Validation And Toggle Show Password
 
 const Register = () => {
   const [registerErr, setRegisterErr] = useState("");
   const [registerSuccess, setRegisterSuccess] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const handleRegister = (e) => {
     e.preventDefault();
     console.log(e);
@@ -14,8 +18,11 @@ const Register = () => {
     const password = e.target.password.value;
     // console.log(email);
     // console.log(password);
-    if (password.length) {
+    if (password.length < 6) {
       setRegisterErr("password should be 6 charecter or longer");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      setRegisterErr("password should be at least one uppercase letter");
       return;
     }
     setRegisterErr("");
@@ -48,12 +55,21 @@ const Register = () => {
           <br />
           <input
             className="w-3/4 mb-5 p-4"
-            type="password"
+            // type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             id=""
             placeholder="password pls"
             required
           />
+          <span
+            onClick={() => {
+              setShowPassword(!showPassword);
+            }}
+            className="text-5xl"
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </span>
           <br />
           <input
             className="btn btn-secondary w-3/4 mb-5 text-center mx-auto p-4"
