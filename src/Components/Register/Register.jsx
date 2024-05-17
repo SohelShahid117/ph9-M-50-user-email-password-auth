@@ -16,6 +16,8 @@ const Register = () => {
     console.log("form submit");
     const email = e.target.email.value;
     const password = e.target.password.value;
+    const accepted = e.target.terms.checked;
+    console.log(accepted);
     // console.log(email);
     // console.log(password);
     if (password.length < 6) {
@@ -23,6 +25,9 @@ const Register = () => {
       return;
     } else if (!/[A-Z]/.test(password)) {
       setRegisterErr("password should be at least one uppercase letter");
+      return;
+    } else if (!accepted) {
+      setRegisterErr("pls accept our terms and conditions");
       return;
     }
     setRegisterErr("");
@@ -53,24 +58,32 @@ const Register = () => {
             required
           />
           <br />
-          <input
-            className="w-3/4 mb-5 p-4"
-            // type="password"
-            type={showPassword ? "text" : "password"}
-            name="password"
-            id=""
-            placeholder="password pls"
-            required
-          />
-          <span
-            onClick={() => {
-              setShowPassword(!showPassword);
-            }}
-            className="text-5xl"
-          >
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </span>
+          <div className="relative">
+            <input
+              className="w-3/4 mb-5 p-4"
+              // type="password"
+              type={showPassword ? "text" : "password"}
+              name="password"
+              id=""
+              placeholder="password pls"
+              required
+            />
+            <span
+              onClick={() => {
+                setShowPassword(!showPassword);
+              }}
+              className="text-2xl absolute -ml-10 my-4"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
           <br />
+          <div>
+            <input type="checkbox" name="terms" id="terms" />
+            <lavel htmlFor="terms">
+              Accept our <a href="">terms & conditions</a>{" "}
+            </lavel>
+          </div>
           <input
             className="btn btn-secondary w-3/4 mb-5 text-center mx-auto p-4"
             type="submit"
