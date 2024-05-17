@@ -9,6 +9,7 @@
 //   </React.StrictMode>,
 // )
 //50-1 Email Password Authentication Project Setup
+//50-2 Simple Form, And Daisy Ui Form
 
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
@@ -18,7 +19,7 @@ import Layout from "./Components/Layout/Layout";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
-
+import HeroRegister from "./Components/HeroRegister/HeroRegister";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/heroRegister",
+        element: <HeroRegister></HeroRegister>,
       },
     ],
   },
