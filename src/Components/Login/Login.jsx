@@ -1,6 +1,7 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import auth from "../../Firebase/Firebase.config";
+import { Link } from "react-router-dom";
 //50-6 Login User And Accept Terms And Conditions
 
 const Login = () => {
@@ -80,6 +81,9 @@ const Login = () => {
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
+          <p>
+            Go to this website <Link to="/register">New Register</Link>{" "}
+          </p>
           {registerErr && <p className="text-red-600">{registerErr}</p>}
           {registerSuccess && (
             <p className="text-green-600">{registerSuccess}</p>

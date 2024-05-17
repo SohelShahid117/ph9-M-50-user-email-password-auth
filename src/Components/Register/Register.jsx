@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import auth from "../../Firebase/Firebase.config";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 //50-4 Simple Input Field Validation, Error, And Success Message
 //50-5 Regular Expression Validation And Toggle Show Password
+//50-7 Forget Or Reset Password, Toggle Registration And Login----5min
 
 const Register = () => {
   const [registerErr, setRegisterErr] = useState("");
@@ -92,6 +94,9 @@ const Register = () => {
         </form>
         {registerErr && <p className="text-red-600">{registerErr}</p>}
         {registerSuccess && <p className="text-green-600">{registerSuccess}</p>}
+        <p>
+          Already have an account ? <Link to="/login">Go To Login</Link>{" "}
+        </p>
       </div>
     </div>
   );
