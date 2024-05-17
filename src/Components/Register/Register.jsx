@@ -1,4 +1,6 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import React from "react";
+import auth from "../../Firebase/Firebase.config";
 
 const Register = () => {
   const handleRegister = (e) => {
@@ -6,9 +8,17 @@ const Register = () => {
     console.log(e);
     console.log("form submit");
     const email = e.target.email.value;
-    const pw = e.target.password.value;
-    console.log(email);
-    console.log(pw);
+    const password = e.target.password.value;
+    // console.log(email);
+    // console.log(password);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        console.log(result);
+        console.log(result.user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="mx-auto w-3/4 bg-cyan-200">
