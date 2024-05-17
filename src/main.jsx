@@ -11,6 +11,7 @@
 //50-1 Email Password Authentication Project Setup
 //50-2 Simple Form, And Daisy Ui Form
 //50-3 Create A New User Using Email And Password On Firebase
+//50-4 Simple Input Field Validation, Error, And Success Message
 
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
