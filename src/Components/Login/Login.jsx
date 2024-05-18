@@ -1,5 +1,8 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import React, { useRef, useState } from "react";
 import auth from "../../Firebase/Firebase.config";
 import { Link } from "react-router-dom";
 //50-6 Login User And Accept Terms And Conditions
@@ -7,6 +10,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const [registerErr, setRegisterErr] = useState("");
   const [registerSuccess, setRegisterSuccess] = useState("");
+  const emailRef = useRef(null);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -35,6 +39,26 @@ const Login = () => {
         setRegisterErr(error.message);
       });
   };
+  const handleForgetPassword = (e) => {
+    const email = emailRef.current.value;
+    // console.log("reset password", emailRef.current.value);
+    const emailRegex =
+      /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+    if (!email) {
+      console.log("send reset email", email);
+      return;
+    } else if (!emailRegex.test(email)) {
+      console.log("type a valid email address", email);
+    }
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("pls check your email");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -55,6 +79,7 @@ const Login = () => {
               <input
                 type="email"
                 name="email"
+                ref={emailRef}
                 placeholder="email"
                 className="input input-bordered"
                 required
@@ -72,7 +97,11 @@ const Login = () => {
                 required
               />
               <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
+                <a
+                  onClick={handleForgetPassword}
+                  href="#"
+                  className="label-text-alt link link-hover"
+                >
                   Forgot password?
                 </a>
               </label>
